@@ -150,7 +150,7 @@ export class SftpStack extends cdk.Stack {
           name("sftp-test-lambda"),
         {
         functionName: name("sftp-test-lambda"),
-        timeout: cdk.Duration.seconds(60),
+        timeout: cdk.Duration.minutes(3),
         runtime: lambda.Runtime.NODEJS_18_X,
         entry: path.join(__dirname,"src/lambda/post-deploy-test-sftp/index.ts"),
         logRetention: logs.RetentionDays.ONE_DAY,
