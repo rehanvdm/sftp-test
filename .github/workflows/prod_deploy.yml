@@ -1,0 +1,27 @@
+name: Prod Deploy
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  prod-cdk-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: CDK Deploy
+        run: npm run cdk -- deploy -c env=prod
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TEST_AUTOMATION_PRIVATE_KEY_VALUE: ${{ secrets.TEST_AUTOMATION_PRIVATE_KEY_VALUE }}
