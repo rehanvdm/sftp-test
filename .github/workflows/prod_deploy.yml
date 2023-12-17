@@ -1,9 +1,10 @@
 name: Prod Deploy
 on:
-  pull_request:
+  push:
     branches:
       - main
-
+env:
+  FORCE_COLOR: 1
 jobs:
   prod-cdk-deploy:
     runs-on: ubuntu-latest
