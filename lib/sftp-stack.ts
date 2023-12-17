@@ -32,7 +32,9 @@ export class SftpStack extends cdk.Stack {
       return id + '-' + resourceId;
     }
 
-
+    //==================================================================================================================
+    //========================================= Resource Definitions ===================================================
+    //==================================================================================================================
     const createSftpStorage = () => {
       const sftpStorageBucket = new s3.Bucket(this, name("sftp-storage"), {
         bucketName: name("sftp-storage"),
@@ -310,7 +312,9 @@ export class SftpStack extends cdk.Stack {
     }
 
 
-
+    //==================================================================================================================
+    //===============================================  Usage ===========================================================
+    //==================================================================================================================
     const alarmTopic = new sns.Topic(this, name('alarm-topic'));
     new sns.Subscription(this, name('alarm-email-subscription'), {
       topic: alarmTopic,
@@ -326,7 +330,6 @@ export class SftpStack extends cdk.Stack {
     createMissingDataLambda(sftpStorageBucket, alarmTopic);
     createSftpServerSchedule(sftpServer, alarmTopic);
     createSftpTest(sftpServer, sftpServerHost, sftpStorageBucket);
-
   }
 
   metricToAlarmId(scope: Construct, metric: cloudwatch.Metric) {
@@ -375,5 +378,4 @@ export class SftpStack extends cdk.Stack {
 
     return alarm;
   }
-
 }

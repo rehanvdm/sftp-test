@@ -9,7 +9,6 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "create-test-automation-secret-local": "AWS_REGION=eu-west-1 ENV=dev ts-node ./scripts/create-test-automation-secret.ts",
     "dev-diff-local": "AWS_PROFILE=systanics-prod-exported cdk diff -c env=dev",
     "dev-deploy-local": "AWS_PROFILE=systanics-prod-exported cdk deploy -c env=dev --require-approval never",
     "prod-diff-local": "AWS_PROFILE=datachef-tha cdk diff -c env=prod",
