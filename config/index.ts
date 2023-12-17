@@ -86,7 +86,7 @@ export const configs: Record<Environment, Config> = {
   prod: {
     env: "prod",
     awsEnv: {
-      account: '',
+      account: '192024214558',
       region: 'eu-west-1',
     },
     testUser: {

@@ -1,0 +1,28 @@
+name: Prod Diff
+on:
+  pull_request:
+    branches:
+      - main
+env:
+  FORCE_COLOR: 1
+jobs:
+  prod-cdk-diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: CDK Diff
+        run: npm run cdk -- diff -c env=prod
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TEST_AUTOMATION_PRIVATE_KEY_VALUE: ${{ secrets.TEST_AUTOMATION_PRIVATE_KEY_VALUE }}
