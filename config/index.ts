@@ -8,18 +8,40 @@ const environments = {
 export const ENVIRONMENTS = Object.values(environments);
 export type Environment = keyof typeof environments;
 
+
 export type SftpUser = {
+  /**
+   * The SFTP username
+   */
   username: string;
+
+  /**
+   * The SFTP home directory the user will be confined to
+   */
   homeDirectory: string;
+
+  /**
+   * The User's public key
+   */
   publicKey: string;
 }
 
+
 export type Config = {
+  /**
+   * The environment name
+   */
   env: Environment,
+  /**  The AWS account and region */
   awsEnv: {
     account: string;
     region: string;
   },
+  /**
+   * Optional. The domain name and certificate to use for the SFTP server.
+   * If specified, the full domain will be: `${subdomain}.${hostedZone.name}`
+   * If not specified, the SFTP server will be created with the default AWS Server domain.
+   */
   domain?: {
     subdomain: string;
     hostedZone: {
@@ -28,15 +50,29 @@ export type Config = {
     }
     certificateArn: string;
   },
+  /**
+   * The test user that will be used to test the SFTP server in the Lambda Custom Resource.
+   * It extends the normal user to also store the private key secret name.
+   */
   testUser: SftpUser & {
     privateKeySecretName: string;
   },
+  /**
+   * The agency users that will be created on the SFTP server.
+   */
   agencyUsers: SftpUser[],
+  /**
+   * The email address to send the alert to when an agency has not uploaded data for a day.
+   * It will also receive infra notifications like Lambda Errors or DLQ messages visible.
+   */
   alertMissingDataEmail: string,
+  /**
+   * Test options to use when testing locally. They should be assigned after the first deployment.
+   */
   testOptions: {
-    sftpHost?: string, // Assign after first deployment to test locally
-    bucketName?: string, // Assign after first deployment to test locally
-    snsAlertTopicArn?: string // Assign after first deployment to test locally
+    sftpHost?: string,
+    bucketName?: string,
+    snsAlertTopicArn?: string
   }
 }
 

@@ -34,7 +34,6 @@ function getPropsFromEvents (event: CloudFormationCustomResourceEvent): CustomRe
   }
 }
 
-// ,context: Context
 export const handler = async (event: CloudFormationCustomResourceEvent): Promise<CloudFormationCustomResourceResponse> => {
   console.debug('event', event);
 
