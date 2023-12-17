@@ -12,8 +12,8 @@
     "create-test-automation-secret-local": "AWS_REGION=eu-west-1 ENV=dev ts-node ./scripts/create-test-automation-secret.ts",
     "dev-diff-local": "AWS_PROFILE=systanics-prod-exported cdk diff -c env=dev",
     "dev-deploy-local": "AWS_PROFILE=systanics-prod-exported cdk deploy -c env=dev --require-approval never",
-    "prod-diff-local": "AWS_PROFILE=systanics-prod-exported cdk diff -c env=prod",
-    "prod-deploy-local": "AWS_PROFILE=systanics-prod-exported cdk deploy -c env=prod --require-approval never"
+    "prod-diff-local": "AWS_PROFILE=datachef-tha cdk diff -c env=prod",
+    "bootstrap": "AWS_PROFILE=datachef-tha-no-session cdk bootstrap aws://192024214558/eu-west-1 -c env=dev --profile datachef-tha-no-session"
   },
   "devDependencies": {
     "@aws-sdk/client-secrets-manager": "^3.474.0",
